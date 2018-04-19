@@ -26,6 +26,8 @@
 %%% Both modules use the same 'model' that descibes the translation, see the 
 %%% introduction to erlsom_parse for the definition of this model.
 
+-compile(export_all).
+
 -module(erlsom_write).
 -export([write/2,
          write/3]).
@@ -570,7 +572,8 @@ processNamespaces(Tag, Namespaces, DeclaredNamespaces = {NamespacesList, Counter
 	           undefined -> " xmlns";
 		   _ -> [" xmlns:", Prefix]
 		 end,
-	  {[Xmlns, "=\"", Uri, "\""], {[{Prefix, Uri} | NamespacesList], Counter}, ""};
+%%	  {[Xmlns, "=\"", Uri, "\""], {[{Prefix, Uri} | NamespacesList], Counter}, ""};
+	  {[], {[{Prefix, Uri} | NamespacesList], Counter}, ""};
 	{value, #ns{uri = Uri, efd = unqualified}} ->
 	  case Prefix of
 	    undefined -> 
@@ -580,7 +583,8 @@ processNamespaces(Tag, Namespaces, DeclaredNamespaces = {NamespacesList, Counter
               Xmlns = [" xmlns:", Prefix],
               Additional_pf = ""
 	  end,
-	  {[Xmlns, "=\"", Uri, "\""], {[{Prefix, Uri} | NamespacesList], Counter}, Additional_pf};
+%%	  {[Xmlns, "=\"", Uri, "\""], {[{Prefix, Uri} | NamespacesList], Counter}, Additional_pf};
+	  {[], {[{Prefix, Uri} | NamespacesList], Counter}, Additional_pf};
 	_ ->
 	  case Prefix of
 	    undefined -> {[], DeclaredNamespaces, ""};

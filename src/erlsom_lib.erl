@@ -24,6 +24,8 @@
 
 -module(erlsom_lib).
 
+-compile(export_all).
+
 -export([convertPCData/4,
          makeName/2, makeName/4, nameWithoutPrefix/1,
          makeAttrName/2, makeTypeName/4, makeTypeName/2,
@@ -593,9 +595,9 @@ findType(TypeReference, Types, Attributes, TypeHierarchy, Namespaces, NamespaceM
   end.
 
 findXsiType([]) -> false;
-findXsiType([#attribute{localName= "type", 
-                        uri = "http://www.w3.org/2001/XMLSchema-instance", 
-                        value = Value}| _Tail]) -> {value, Value};
+%findXsiType([#attribute{localName= "type", 
+%                        uri = "http://www.w3.org/2001/XMLSchema-instance", 
+%                        value = Value}| _Tail]) -> {value, Value};
 findXsiType([_| Tail]) -> 
   findXsiType(Tail).
 
